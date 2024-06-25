@@ -15,6 +15,8 @@ protocol ImageCellDelegate: AnyObject{
 
 class ImageCell: UITableViewCell {
     weak var delegate: ImageCellDelegate?
+    private var cachedImage: UIImage?
+    
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var titleLbl: UILabel!
     
@@ -40,7 +42,16 @@ class ImageCell: UITableViewCell {
         self.titleLbl.text = imageData.author ?? ""
         self.descriptionLbl.text = imageData.downloadURL ?? ""
         self.photoImageView.contentMode = .scaleAspectFill
-        self.photoImageView.sd_setImage(with: URL(string: imageData.downloadURL ?? ""))
+        
+        self.photoImageView.sd_imageIndicator = SDWebImageActivityIndicator.large
+        self.photoImageView.sd_setImage(with: URL(string: imageData.downloadURL ?? "")) { (image, error, cache, urls) in
+            if (error != nil) {
+                self.photoImageView.image = UIImage(named: "noimageicon")
+            } else {
+                self.photoImageView.image = image
+            }
+}
+        //self.downloadImage(url: imageData.downloadURL ?? "")
         self.checkBoxBtn.setImage(imageData.isChecked ? UIImage(named: "checked") : UIImage(named: "unchecked") , for: .normal)
         self.isCheckBoxSelected = imageData.isChecked
     }
@@ -53,4 +64,6 @@ class ImageCell: UITableViewCell {
         delegate?.checkBoxPressed(isChecked: self.isCheckBoxSelected, index: cellIndex)
         
     }
+    
+    
 }

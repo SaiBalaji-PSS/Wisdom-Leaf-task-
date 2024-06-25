@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import SDWebImage
 
 class ImagesViewController: UIViewController {
 
@@ -27,6 +28,7 @@ class ImagesViewController: UIViewController {
     func configureUI(){
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.prefetchDataSource = self
         tableView.register(UINib(nibName: "ImageCell", bundle: nil),forCellReuseIdentifier: "CELL")
         vm.getImages(pageCount: vm.currentPage)
     }
@@ -52,6 +54,29 @@ class ImagesViewController: UIViewController {
 }
 
 
+extension ImagesViewController: UITableViewDataSourcePrefetching{
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        
+        if let lastIndexPath = indexPaths.last, vm.isLoading == false && lastIndexPath.row == vm.images.count - 1{
+            vm.currentPage += 1
+            
+            vm.getImages(pageCount:vm.currentPage)
+            
+            print("CALLED PREFETCH AT \(lastIndexPath.row) \(vm.images.count)")
+        }
+        let urls = indexPaths.compactMap { indexPath -> URL? in
+            let imageUrlString = vm.images[indexPath.row].downloadURL ?? ""
+             return URL(string: imageUrlString)
+         }
+
+         SDWebImagePrefetcher.shared.prefetchURLs(urls)
+    }
+    func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
+       
+
+            SDWebImagePrefetcher.shared.cancelPrefetching()
+    }
+}
 
 extension ImagesViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -67,10 +92,10 @@ extension ImagesViewController: UITableViewDelegate, UITableViewDataSource{
         return UITableViewCell()
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if vm.isLoading == false && indexPath.row == vm.images.count - 2{
-            vm.currentPage += 1
-            vm.getImages(pageCount:vm.currentPage)
-        }
+//        if vm.isLoading == false && indexPath.row == vm.images.count - 2{
+//            vm.currentPage += 1
+//            vm.getImages(pageCount:vm.currentPage)
+//        }
     }
 }
 
