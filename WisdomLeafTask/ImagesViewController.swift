@@ -27,7 +27,7 @@ class ImagesViewController: UIViewController {
     func configureUI(){
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self,forCellReuseIdentifier: "CELL")
+        tableView.register(UINib(nibName: "ImageCell", bundle: nil),forCellReuseIdentifier: "CELL")
         vm.getImages(pageCount: vm.currentPage)
     }
     
@@ -58,9 +58,12 @@ extension ImagesViewController: UITableViewDelegate, UITableViewDataSource{
         return vm.images.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CELL", for: indexPath)
-        cell.textLabel?.text = vm.images[indexPath.row].author ?? ""
-        return cell
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "CELL", for: indexPath) as? ImageCell{
+            cell.titleLbl.text = vm.images[indexPath.row].author ?? ""
+            cell.descriptionLbl.text = (vm.images[indexPath.row].downloadURL ?? "") + (vm.images[indexPath.row].downloadURL ?? "") + (vm.images[indexPath.row].downloadURL ?? "")
+            return cell
+        }
+        return UITableViewCell()
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if vm.isLoading == false && indexPath.row == vm.images.count - 2{
