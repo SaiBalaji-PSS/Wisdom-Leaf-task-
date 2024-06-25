@@ -32,6 +32,7 @@ extension NetworkServiceError: LocalizedError{
 
 
 class NetworkService{
+    private init(){}
     static let shared = NetworkService()
     private var session = URLSession(configuration: .default)
     

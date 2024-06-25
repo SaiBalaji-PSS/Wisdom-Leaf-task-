@@ -15,6 +15,7 @@
 		E429C7692C2AD0FB003A12E1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E429C7672C2AD0FB003A12E1 /* LaunchScreen.storyboard */; };
 		E429C7762C2AD1D8003A12E1 /* APIResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E429C7752C2AD1D8003A12E1 /* APIResponseModel.swift */; };
 		E429C7792C2AD22B003A12E1 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E429C7782C2AD22B003A12E1 /* NetworkService.swift */; };
+		E429C77B2C2AF64F003A12E1 /* ImagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E429C77A2C2AF64F003A12E1 /* ImagesViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		E429C76A2C2AD0FB003A12E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E429C7752C2AD1D8003A12E1 /* APIResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponseModel.swift; sourceTree = "<group>"; };
 		E429C7782C2AD22B003A12E1 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		E429C77A2C2AF64F003A12E1 /* ImagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 		E429C7722C2AD153003A12E1 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				E429C77A2C2AF64F003A12E1 /* ImagesViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -184,6 +187,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E429C77B2C2AF64F003A12E1 /* ImagesViewModel.swift in Sources */,
 				E429C7792C2AD22B003A12E1 /* NetworkService.swift in Sources */,
 				E429C7612C2AD0FA003A12E1 /* ImagesViewController.swift in Sources */,
 				E429C75D2C2AD0FA003A12E1 /* AppDelegate.swift in Sources */,
