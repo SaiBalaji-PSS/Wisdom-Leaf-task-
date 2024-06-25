@@ -9,21 +9,25 @@
 /* Begin PBXBuildFile section */
 		E429C75D2C2AD0FA003A12E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E429C75C2C2AD0FA003A12E1 /* AppDelegate.swift */; };
 		E429C75F2C2AD0FA003A12E1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E429C75E2C2AD0FA003A12E1 /* SceneDelegate.swift */; };
-		E429C7612C2AD0FA003A12E1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E429C7602C2AD0FA003A12E1 /* ViewController.swift */; };
+		E429C7612C2AD0FA003A12E1 /* ImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E429C7602C2AD0FA003A12E1 /* ImagesViewController.swift */; };
 		E429C7642C2AD0FA003A12E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E429C7622C2AD0FA003A12E1 /* Main.storyboard */; };
 		E429C7662C2AD0FB003A12E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E429C7652C2AD0FB003A12E1 /* Assets.xcassets */; };
 		E429C7692C2AD0FB003A12E1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E429C7672C2AD0FB003A12E1 /* LaunchScreen.storyboard */; };
+		E429C7762C2AD1D8003A12E1 /* APIResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E429C7752C2AD1D8003A12E1 /* APIResponseModel.swift */; };
+		E429C7792C2AD22B003A12E1 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E429C7782C2AD22B003A12E1 /* NetworkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E429C7592C2AD0FA003A12E1 /* WisdomLeafTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WisdomLeafTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E429C75C2C2AD0FA003A12E1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E429C75E2C2AD0FA003A12E1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		E429C7602C2AD0FA003A12E1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E429C7602C2AD0FA003A12E1 /* ImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesViewController.swift; sourceTree = "<group>"; };
 		E429C7632C2AD0FA003A12E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E429C7652C2AD0FB003A12E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E429C7682C2AD0FB003A12E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E429C76A2C2AD0FB003A12E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E429C7752C2AD1D8003A12E1 /* APIResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponseModel.swift; sourceTree = "<group>"; };
+		E429C7782C2AD22B003A12E1 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +60,57 @@
 		E429C75B2C2AD0FA003A12E1 /* WisdomLeafTask */ = {
 			isa = PBXGroup;
 			children = (
+				E429C7772C2AD213003A12E1 /* Service */,
+				E429C7732C2AD159003A12E1 /* Controller */,
+				E429C7722C2AD153003A12E1 /* ViewModel */,
+				E429C7712C2AD14E003A12E1 /* View */,
+				E429C7702C2AD148003A12E1 /* Model */,
 				E429C75C2C2AD0FA003A12E1 /* AppDelegate.swift */,
 				E429C75E2C2AD0FA003A12E1 /* SceneDelegate.swift */,
-				E429C7602C2AD0FA003A12E1 /* ViewController.swift */,
+				E429C7602C2AD0FA003A12E1 /* ImagesViewController.swift */,
 				E429C7622C2AD0FA003A12E1 /* Main.storyboard */,
 				E429C7652C2AD0FB003A12E1 /* Assets.xcassets */,
 				E429C7672C2AD0FB003A12E1 /* LaunchScreen.storyboard */,
 				E429C76A2C2AD0FB003A12E1 /* Info.plist */,
 			);
 			path = WisdomLeafTask;
+			sourceTree = "<group>";
+		};
+		E429C7702C2AD148003A12E1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E429C7752C2AD1D8003A12E1 /* APIResponseModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E429C7712C2AD14E003A12E1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E429C7722C2AD153003A12E1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E429C7732C2AD159003A12E1 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E429C7772C2AD213003A12E1 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				E429C7782C2AD22B003A12E1 /* NetworkService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,9 +184,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E429C7612C2AD0FA003A12E1 /* ViewController.swift in Sources */,
+				E429C7792C2AD22B003A12E1 /* NetworkService.swift in Sources */,
+				E429C7612C2AD0FA003A12E1 /* ImagesViewController.swift in Sources */,
 				E429C75D2C2AD0FA003A12E1 /* AppDelegate.swift in Sources */,
 				E429C75F2C2AD0FA003A12E1 /* SceneDelegate.swift in Sources */,
+				E429C7762C2AD1D8003A12E1 /* APIResponseModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +340,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RRW6B7FDKR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WisdomLeafTask/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -319,6 +368,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RRW6B7FDKR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WisdomLeafTask/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
