@@ -6,12 +6,24 @@
 //
 
 import UIKit
+import SDWebImage
+
+
+protocol ImageCellDelegate: AnyObject{
+    func checkBoxPressed(isChecked: Bool,index: IndexPath)
+}
 
 class ImageCell: UITableViewCell {
-
+    weak var delegate: ImageCellDelegate?
+    @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var titleLbl: UILabel!
     
+    @IBOutlet weak var checkBoxBtn: UIButton!
     @IBOutlet weak var descriptionLbl: UILabel!
+    var isCheckBoxSelected = false
+    var cellIndex: IndexPath = IndexPath()
+
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -23,4 +35,22 @@ class ImageCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func updateCell(imageData: Image){
+    
+        self.titleLbl.text = imageData.author ?? ""
+        self.descriptionLbl.text = imageData.downloadURL ?? ""
+        self.photoImageView.contentMode = .scaleAspectFill
+        self.photoImageView.sd_setImage(with: URL(string: imageData.downloadURL ?? ""))
+        self.checkBoxBtn.setImage(imageData.isChecked ? UIImage(named: "checked") : UIImage(named: "unchecked") , for: .normal)
+        self.isCheckBoxSelected = imageData.isChecked
+    }
+    
+    @IBAction func checkBoxBtnPressed(_ sender: UIButton) {
+
+        self.isCheckBoxSelected.toggle()
+        print(isCheckBoxSelected)
+       // self.checkBoxBtn.setImage(self.isCheckBoxSelected ? UIImage(named: "checked") : UIImage(named: "unchecked") , for: .normal)
+        delegate?.checkBoxPressed(isChecked: self.isCheckBoxSelected, index: cellIndex)
+        
+    }
 }

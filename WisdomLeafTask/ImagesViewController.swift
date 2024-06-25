@@ -59,8 +59,9 @@ extension ImagesViewController: UITableViewDelegate, UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "CELL", for: indexPath) as? ImageCell{
-            cell.titleLbl.text = vm.images[indexPath.row].author ?? ""
-            cell.descriptionLbl.text = (vm.images[indexPath.row].downloadURL ?? "") + (vm.images[indexPath.row].downloadURL ?? "") + (vm.images[indexPath.row].downloadURL ?? "")
+            cell.cellIndex = indexPath
+            cell.delegate = self
+            cell.updateCell(imageData: vm.images[indexPath.row])
             return cell
         }
         return UITableViewCell()
@@ -70,5 +71,14 @@ extension ImagesViewController: UITableViewDelegate, UITableViewDataSource{
             vm.currentPage += 1
             vm.getImages(pageCount:vm.currentPage)
         }
+    }
+}
+
+
+extension ImagesViewController: ImageCellDelegate{
+    func checkBoxPressed(isChecked: Bool, index: IndexPath) {
+        print("Check box of row \(index.row) is \(isChecked)")
+        vm.images[index.row].isChecked = isChecked
+        self.tableView.reloadRows(at: [index], with: .automatic)
     }
 }
