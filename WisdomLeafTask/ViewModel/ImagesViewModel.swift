@@ -8,17 +8,18 @@
 import Foundation
 import Combine
 
-struct Constants{
-    static let BASE_URL = "https://picsum.photos/v2/list"
-}
+
 
 class ImagesViewModel: ObservableObject{
+    //MARK: - PROPERTIES
     @Published var images = [Image]()
     @Published var error: Error?
     var isLoading = false
     var currentPage = 1
-    //https://picsum.photos/v2/list?page=2&limit=20
+    
+    //MARK: - GET THE IMAGES FROM API FOR GIVEN PAGE COUNT
     func getImages(pageCount: Int){
+        
         if isLoading{
             return
         }
@@ -26,7 +27,7 @@ class ImagesViewModel: ObservableObject{
         var urlComponets = URLComponents(string: "\(Constants.BASE_URL)")
         urlComponets?.queryItems = [URLQueryItem(name: "page", value: "\(pageCount)"),
                                     URLQueryItem(name: "limit", value: "20")]
-        print("URL IS \(urlComponets?.url?.absoluteString)")
+        //print("URL IS \(urlComponets?.url?.absoluteString)")
         if let finalURL = urlComponets?.url?.absoluteString{
             Task{
                 let result = await NetworkService.shared.sendGETRequest(url: finalURL, responseType: [Image].self)

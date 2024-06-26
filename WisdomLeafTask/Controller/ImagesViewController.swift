@@ -11,12 +11,13 @@ import SDWebImage
 
 class ImagesViewController: UIViewController {
     
+    //MARK: - PROPERTIES
     @IBOutlet weak var tableView: UITableView!
     var vm = ImagesViewModel()
     var imagesAPISubscriber: AnyCancellable?
     var errorSubscriber: AnyCancellable?
     
-    
+    //MARK: - LIFE CYCLE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -24,7 +25,10 @@ class ImagesViewController: UIViewController {
         self.setupBinding()
     }
     
+ 
     
+    
+    //MARK: - CONFIGURE UITABLE VIEW AND NAVIGATION BAR RIGHT BAR BUTTON ITEM
     func configureUI(){
         tableView.delegate = self
         tableView.dataSource = self
@@ -39,11 +43,14 @@ class ImagesViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.counterclockwise"), style: .plain, target: self, action: #selector(refreshBtnPressed))
         
     }
+    //MARK: - CLEAR THE ARRAY AND FETCH THE UPDATED DATA FROM API
     @objc func refreshBtnPressed(){
         vm.images.removeAll()
         self.tableView.reloadData()
         vm.getImages(pageCount: 1)
     }
+    
+    //MARK: - SETUP MVVM BINDING WITH THE VIEW-MODEL
     func setupBinding(){
         imagesAPISubscriber = vm.$images.sink(receiveValue: { images  in
             DispatchQueue.main.async {
@@ -63,6 +70,7 @@ class ImagesViewController: UIViewController {
     }
     
     
+    //MARK: - SHOW NATIVE ALERT FOR GIVEN TITLE AND MESSAGE
     func showAlert(title: String,message: String){
         let avc = UIAlertController(title: title, message: message, preferredStyle: .alert)
         avc.addAction(UIAlertAction(title: "Ok", style: .default))
@@ -72,7 +80,7 @@ class ImagesViewController: UIViewController {
     
 }
 
-
+//MARK: - FOR PREFETCHING DATA FROM API
 extension ImagesViewController: UITableViewDataSourcePrefetching{
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         
@@ -83,15 +91,14 @@ extension ImagesViewController: UITableViewDataSourcePrefetching{
             
             print("CALLED PREFETCH AT \(lastIndexPath.row) \(vm.images.count)")
         }
-        
-    }
-    func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
-        
-        
        
+        
     }
+    
+  
 }
 
+//MARK: - TABLE VIEW DELEGATE METHODS
 extension ImagesViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return vm.images.count
@@ -124,9 +131,12 @@ extension ImagesViewController: UITableViewDelegate, UITableViewDataSource{
 }
 
 
+
+//MARK: - DELEGATE METHOD WHEN THE CHECK BOX IN TABLE VIEW CELL IS PRESSED
+
 extension ImagesViewController: ImageCellDelegate{
     func checkBoxPressed(isChecked: Bool, index: IndexPath) {
-        print("Check box of row \(index.row) is \(isChecked)")
+        //print("Check box of row \(index.row) is \(isChecked)")
         vm.images[index.row].isChecked = isChecked
         self.tableView.reloadData()
     }

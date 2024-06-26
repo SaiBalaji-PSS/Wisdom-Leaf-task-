@@ -7,9 +7,7 @@
 
 import Foundation
 
-struct APIResponse: Codable{
-    let images: [Image]?
-}
+
 struct Image: Codable {
     var isChecked = false 
     let id, author: String?

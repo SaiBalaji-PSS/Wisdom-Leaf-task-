@@ -7,6 +7,11 @@
 
 import Foundation
 
+struct Constants{
+    static let BASE_URL = "https://picsum.photos/v2/list"
+}
+
+//MARK: - CUSTOM ERROR ENUM 
 enum NetworkServiceError: Error{
     case invalidURL
     case invalidResponse
@@ -15,6 +20,7 @@ enum NetworkServiceError: Error{
 }
 
 
+//MARK: - CUSTOM ERROR MESSAGES
 extension NetworkServiceError: LocalizedError{
     var errorDescription: String?{
         switch self {
@@ -32,10 +38,12 @@ extension NetworkServiceError: LocalizedError{
 
 
 class NetworkService{
+    //MARK: - PROPERTIES
     private init(){}
     static let shared = NetworkService()
     private var session = URLSession(configuration: .default)
     
+    //MARK: - SEND GET REQUEST TO THE SERVER
     func sendGETRequest<T: Codable>(url: String,responseType: T.Type)async -> Result<T,Error>{
         guard let url = URL(string: url)else{return .failure(NetworkServiceError.invalidURL)}
         var request  = URLRequest(url: url)

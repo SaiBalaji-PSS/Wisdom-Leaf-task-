@@ -16,7 +16,7 @@ protocol ImageCellDelegate: AnyObject{
 
 class ImageCell: UITableViewCell {
     weak var delegate: ImageCellDelegate?
-    private var cachedImage: UIImage?
+    
     
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var titleLbl: UILabel!
@@ -48,14 +48,15 @@ class ImageCell: UITableViewCell {
      
 
 
+        //DOWNLOAD THE IMAGE FROM THE URL AND RESIZE THE IMAGE AND SET IT TO THE UIIMAGEVIEW
         self.photoImageView.sd_setImage(with: URL(string: imageData.downloadURL ?? ""),placeholderImage: UIImage(named: "noimageicon")) { (image, error, cache, urls) in
            
                 //print("CELL HEIGHT IS \(self.frame.height)")
                 if let downladedImage = image{
-                    let resizedImage = downladedImage.resized(to: CGSize(width: 50, height: 50))
+                    let resizedImage = downladedImage.resized(to: CGSize(width: 100, height: 100))
                     self.photoImageView.image = resizedImage
-                  //  SDImageCache.shared.store(resizedImage, forKey: "\(self.cellIndex.row)", completion: nil)
                     self.photoImageView.sd_imageIndicator = .none
+                    
                 }
             
         }
