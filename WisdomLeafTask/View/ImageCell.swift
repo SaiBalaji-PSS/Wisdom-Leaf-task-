@@ -40,7 +40,7 @@ class ImageCell: UITableViewCell {
     func updateCell(imageData: Image){
     
         self.titleLbl.text = imageData.author ?? ""
-        self.descriptionLbl.text = imageData.downloadURL ?? ""
+        self.descriptionLbl.text = "Author: \(imageData.author ?? "")\n" + "Download URL: \(imageData.downloadURL ?? "")\n"
         self.photoImageView.contentMode = .scaleAspectFill
         
         self.photoImageView.sd_imageIndicator = SDWebImageActivityIndicator.large
@@ -50,8 +50,8 @@ class ImageCell: UITableViewCell {
             } else {
                 self.photoImageView.image = image
             }
-}
-        //self.downloadImage(url: imageData.downloadURL ?? "")
+        }
+
         self.checkBoxBtn.setImage(imageData.isChecked ? UIImage(named: "checked") : UIImage(named: "unchecked") , for: .normal)
         self.isCheckBoxSelected = imageData.isChecked
     }
@@ -60,7 +60,6 @@ class ImageCell: UITableViewCell {
 
         self.isCheckBoxSelected.toggle()
         print(isCheckBoxSelected)
-       // self.checkBoxBtn.setImage(self.isCheckBoxSelected ? UIImage(named: "checked") : UIImage(named: "unchecked") , for: .normal)
         delegate?.checkBoxPressed(isChecked: self.isCheckBoxSelected, index: cellIndex)
         
     }

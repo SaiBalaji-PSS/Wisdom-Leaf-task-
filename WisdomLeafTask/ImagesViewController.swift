@@ -10,12 +10,12 @@ import Combine
 import SDWebImage
 
 class ImagesViewController: UIViewController {
-
+    
     @IBOutlet weak var tableView: UITableView!
     var vm = ImagesViewModel()
     var imagesAPISubscriber: AnyCancellable?
     var errorSubscriber: AnyCancellable?
-   
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +23,7 @@ class ImagesViewController: UIViewController {
         self.configureUI()
         self.setupBinding()
     }
-
+    
     
     func configureUI(){
         tableView.delegate = self
@@ -39,18 +39,26 @@ class ImagesViewController: UIViewController {
                 print(images)
                 self.tableView.reloadData()
             }
-        
+            
         })
         errorSubscriber = vm.$error.sink(receiveValue: { error  in
             DispatchQueue.main.async {
                 if let error{
                     print(error)
+                    self.showAlert(title: "Error", message: error.localizedDescription)
                 }
             }
         })
     }
     
-
+    
+    func showAlert(title: String,message: String){
+        let avc = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        avc.addAction(UIAlertAction(title: "Ok", style: .default))
+        self.present(avc, animated: true)
+    }
+    
+    
 }
 
 
@@ -66,15 +74,15 @@ extension ImagesViewController: UITableViewDataSourcePrefetching{
         }
         let urls = indexPaths.compactMap { indexPath -> URL? in
             let imageUrlString = vm.images[indexPath.row].downloadURL ?? ""
-             return URL(string: imageUrlString)
-         }
-
-         SDWebImagePrefetcher.shared.prefetchURLs(urls)
+            return URL(string: imageUrlString)
+        }
+        
+        SDWebImagePrefetcher.shared.prefetchURLs(urls)
     }
     func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
-       
-
-            SDWebImagePrefetcher.shared.cancelPrefetching()
+        
+        
+        SDWebImagePrefetcher.shared.cancelPrefetching()
     }
 }
 
@@ -91,12 +99,15 @@ extension ImagesViewController: UITableViewDelegate, UITableViewDataSource{
         }
         return UITableViewCell()
     }
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        if vm.isLoading == false && indexPath.row == vm.images.count - 2{
-//            vm.currentPage += 1
-//            vm.getImages(pageCount:vm.currentPage)
-//        }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if vm.images[indexPath.row].isChecked{
+            self.showAlert(title: "Info", message: vm.images[indexPath.row].downloadURL ?? "")
+        }
+        else{
+            self.showAlert(title: "Info", message: "Check box is disabled")
+        }
     }
+    
 }
 
 
