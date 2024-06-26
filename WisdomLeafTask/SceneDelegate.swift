@@ -18,10 +18,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
-        window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SplashScreen")
+        window?.rootViewController =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SplashScreen")
         window?.makeKeyAndVisible()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5, execute: {
-            self.window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ImagesViewController")
+            self.window?.rootViewController = UINavigationController(rootViewController:  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ImagesViewController"))
         })
     }
 

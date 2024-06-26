@@ -9,6 +9,7 @@ import UIKit
 import SDWebImage
 
 
+
 protocol ImageCellDelegate: AnyObject{
     func checkBoxPressed(isChecked: Bool,index: IndexPath)
 }
@@ -29,7 +30,7 @@ class ImageCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
+        self.photoImageView.image = UIImage(named: "noimageicon")
        
     }
 
@@ -43,20 +44,22 @@ class ImageCell: UITableViewCell {
     
         self.titleLbl.text = imageData.author ?? ""
         self.descriptionLbl.text = "DOWNLOAD URL: \(imageData.downloadURL ?? "")"
-        self.photoImageView.contentMode = .scaleToFill
-        self.photoImageView.clipsToBounds = true
+    
      
-        self.photoImageView.sd_imageIndicator = SDWebImageActivityIndicator.large
-        
-        self.photoImageView.sd_setImage(with: URL(string: imageData.downloadURL ?? "")) { (image, error, cache, urls) in
-            if (error != nil) {
-                self.photoImageView.image = UIImage(named: "noimageicon")
-            } else {
+
+
+        self.photoImageView.sd_setImage(with: URL(string: imageData.downloadURL ?? ""),placeholderImage: UIImage(named: "noimageicon")) { (image, error, cache, urls) in
+           
                 //print("CELL HEIGHT IS \(self.frame.height)")
-                self.photoImageView.image = image
-            }
+                if let downladedImage = image{
+                    let resizedImage = downladedImage.resized(to: CGSize(width: 50, height: 50))
+                    self.photoImageView.image = resizedImage
+                  //  SDImageCache.shared.store(resizedImage, forKey: "\(self.cellIndex.row)", completion: nil)
+                    self.photoImageView.sd_imageIndicator = .none
+                }
+            
         }
-        
+
         
         
 
@@ -71,6 +74,8 @@ class ImageCell: UITableViewCell {
         delegate?.checkBoxPressed(isChecked: self.isCheckBoxSelected, index: cellIndex)
         
     }
+    
+    
     
     
 }

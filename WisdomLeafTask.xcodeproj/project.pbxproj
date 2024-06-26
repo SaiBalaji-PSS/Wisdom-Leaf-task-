@@ -18,8 +18,8 @@
 		E429C77B2C2AF64F003A12E1 /* ImagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E429C77A2C2AF64F003A12E1 /* ImagesViewModel.swift */; };
 		E429C77E2C2AFC16003A12E1 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E429C77C2C2AFC16003A12E1 /* ImageCell.swift */; };
 		E429C77F2C2AFC16003A12E1 /* ImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E429C77D2C2AFC16003A12E1 /* ImageCell.xib */; };
-		E429C7822C2B0041003A12E1 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = E429C7812C2B0041003A12E1 /* SDWebImage */; };
-		E429C7842C2B0041003A12E1 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E429C7832C2B0041003A12E1 /* SDWebImageMapKit */; };
+		E4DB381B2C2BF135005A7902 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = E4DB381A2C2BF135005A7902 /* SDWebImage */; };
+		E4DB381D2C2BF135005A7902 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E4DB381C2C2BF135005A7902 /* SDWebImageMapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,8 +43,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E429C7842C2B0041003A12E1 /* SDWebImageMapKit in Frameworks */,
-				E429C7822C2B0041003A12E1 /* SDWebImage in Frameworks */,
+				E4DB381D2C2BF135005A7902 /* SDWebImageMapKit in Frameworks */,
+				E4DB381B2C2BF135005A7902 /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,8 +143,8 @@
 			);
 			name = WisdomLeafTask;
 			packageProductDependencies = (
-				E429C7812C2B0041003A12E1 /* SDWebImage */,
-				E429C7832C2B0041003A12E1 /* SDWebImageMapKit */,
+				E4DB381A2C2BF135005A7902 /* SDWebImage */,
+				E4DB381C2C2BF135005A7902 /* SDWebImageMapKit */,
 			);
 			productName = WisdomLeafTask;
 			productReference = E429C7592C2AD0FA003A12E1 /* WisdomLeafTask.app */;
@@ -175,7 +175,7 @@
 			);
 			mainGroup = E429C7502C2AD0FA003A12E1;
 			packageReferences = (
-				E429C7802C2B0041003A12E1 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				E4DB38192C2BF135005A7902 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = E429C75A2C2AD0FA003A12E1 /* Products */;
 			projectDirPath = "";
@@ -438,7 +438,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		E429C7802C2B0041003A12E1 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+		E4DB38192C2BF135005A7902 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
 			requirement = {
@@ -449,14 +449,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		E429C7812C2B0041003A12E1 /* SDWebImage */ = {
+		E4DB381A2C2BF135005A7902 /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E429C7802C2B0041003A12E1 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			package = E4DB38192C2BF135005A7902 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
 		};
-		E429C7832C2B0041003A12E1 /* SDWebImageMapKit */ = {
+		E4DB381C2C2BF135005A7902 /* SDWebImageMapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E429C7802C2B0041003A12E1 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			package = E4DB38192C2BF135005A7902 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImageMapKit;
 		};
 /* End XCSwiftPackageProductDependency section */

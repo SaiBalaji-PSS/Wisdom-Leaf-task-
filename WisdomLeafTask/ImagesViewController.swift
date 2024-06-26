@@ -36,8 +36,14 @@ class ImagesViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         vm.getImages(pageCount: vm.currentPage)
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.counterclockwise"), style: .plain, target: self, action: #selector(refreshBtnPressed))
+        
     }
-    
+    @objc func refreshBtnPressed(){
+        vm.images.removeAll()
+        self.tableView.reloadData()
+        vm.getImages(pageCount: 1)
+    }
     func setupBinding(){
         imagesAPISubscriber = vm.$images.sink(receiveValue: { images  in
             DispatchQueue.main.async {
@@ -77,17 +83,12 @@ extension ImagesViewController: UITableViewDataSourcePrefetching{
             
             print("CALLED PREFETCH AT \(lastIndexPath.row) \(vm.images.count)")
         }
-        let urls = indexPaths.compactMap { indexPath -> URL? in
-            let imageUrlString = vm.images[indexPath.row].downloadURL ?? ""
-            return URL(string: imageUrlString)
-        }
         
-        SDWebImagePrefetcher.shared.prefetchURLs(urls)
     }
     func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
         
         
-        SDWebImagePrefetcher.shared.cancelPrefetching()
+       
     }
 }
 
