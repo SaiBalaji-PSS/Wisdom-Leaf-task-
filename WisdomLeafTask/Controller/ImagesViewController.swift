@@ -113,6 +113,7 @@ extension ImagesViewController: UITableViewDelegate, UITableViewDataSource{
         return UITableViewCell()
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         if vm.images[indexPath.row].isChecked{
             self.showAlert(title: "Info", message: vm.images[indexPath.row].downloadURL ?? "")
         }
