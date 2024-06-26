@@ -29,6 +29,8 @@ class ImageCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+       
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -40,17 +42,23 @@ class ImageCell: UITableViewCell {
     func updateCell(imageData: Image){
     
         self.titleLbl.text = imageData.author ?? ""
-        self.descriptionLbl.text = "Author: \(imageData.author ?? "")\n" + "Download URL: \(imageData.downloadURL ?? "")\n"
-        self.photoImageView.contentMode = .scaleAspectFill
-        
+        self.descriptionLbl.text = "DOWNLOAD URL: \(imageData.downloadURL ?? "")"
+        self.photoImageView.contentMode = .scaleToFill
+        self.photoImageView.clipsToBounds = true
+     
         self.photoImageView.sd_imageIndicator = SDWebImageActivityIndicator.large
+        
         self.photoImageView.sd_setImage(with: URL(string: imageData.downloadURL ?? "")) { (image, error, cache, urls) in
             if (error != nil) {
                 self.photoImageView.image = UIImage(named: "noimageicon")
             } else {
+                //print("CELL HEIGHT IS \(self.frame.height)")
                 self.photoImageView.image = image
             }
         }
+        
+        
+        
 
         self.checkBoxBtn.setImage(imageData.isChecked ? UIImage(named: "checked") : UIImage(named: "unchecked") , for: .normal)
         self.isCheckBoxSelected = imageData.isChecked
@@ -65,4 +73,12 @@ class ImageCell: UITableViewCell {
     }
     
     
+}
+
+extension UIImage {
+    func resized(to size: CGSize) -> UIImage {
+        return UIGraphicsImageRenderer(size: size).image { _ in
+            draw(in: CGRect(origin: .zero, size: size))
+        }
+    }
 }

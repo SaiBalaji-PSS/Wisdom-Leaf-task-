@@ -30,7 +30,12 @@ class ImagesViewController: UIViewController {
         tableView.dataSource = self
         tableView.prefetchDataSource = self
         tableView.register(UINib(nibName: "ImageCell", bundle: nil),forCellReuseIdentifier: "CELL")
+       
+
+        tableView.estimatedRowHeight = 100
+        tableView.rowHeight = UITableView.automaticDimension
         vm.getImages(pageCount: vm.currentPage)
+        
     }
     
     func setupBinding(){
@@ -108,6 +113,13 @@ extension ImagesViewController: UITableViewDelegate, UITableViewDataSource{
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+  
+   
+    
+    
 }
 
 
@@ -115,6 +127,6 @@ extension ImagesViewController: ImageCellDelegate{
     func checkBoxPressed(isChecked: Bool, index: IndexPath) {
         print("Check box of row \(index.row) is \(isChecked)")
         vm.images[index.row].isChecked = isChecked
-        self.tableView.reloadRows(at: [index], with: .automatic)
+        self.tableView.reloadData()
     }
 }
